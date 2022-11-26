@@ -102,7 +102,7 @@ public class FinestraLobby extends JFrame {
     m0.addMouseListener(new MouseAdapter() {
       @Override
       public void mousePressed(MouseEvent e) {
-        Utilita.openWebpage("https://github.com/unldenis/DamaOnline");
+        Utilita.openWebpage("https://github.com/unldenis/Dama");
       }
     });
 
