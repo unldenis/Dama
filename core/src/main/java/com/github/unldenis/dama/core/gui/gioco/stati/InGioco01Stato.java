@@ -3,7 +3,6 @@ package com.github.unldenis.dama.core.gui.gioco.stati;
 import com.github.unldenis.dama.api.model.Cella;
 import com.github.unldenis.dama.api.model.Colore;
 import com.github.unldenis.dama.api.model.Movimento;
-import com.github.unldenis.dama.api.model.Pedone;
 import com.github.unldenis.dama.api.model.Punto;
 import com.github.unldenis.dama.api.model.ResultMovimento.ErrMovimento;
 import com.github.unldenis.dama.api.net.packet.TipoPacchetto;
@@ -14,7 +13,7 @@ import com.github.unldenis.dama.api.net.packet.clientbound.PacchettoOutPartitaTe
 import com.github.unldenis.dama.api.net.packet.clientbound.PacchettoOutPossibiliMovimenti;
 import com.github.unldenis.dama.api.net.packet.serverbound.PacchettoInMuovi;
 import com.github.unldenis.dama.api.net.packet.serverbound.PacchettoInPossibiliMovimenti;
-import com.github.unldenis.dama.core.Constanti;
+import com.github.unldenis.dama.api.Constanti;
 import com.github.unldenis.dama.core.gui.gioco.Gioco;
 import com.github.unldenis.dama.core.net.client.Client;
 import java.awt.Graphics2D;

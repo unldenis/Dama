@@ -5,7 +5,7 @@ import com.github.unldenis.dama.api.net.packet.TipoPacchetto;
 import com.github.unldenis.dama.api.net.packet.clientbound.PacchettoOut;
 import com.github.unldenis.dama.api.net.packet.clientbound.PacchettoOutAvversarioDisconnesso;
 import com.github.unldenis.dama.api.net.packet.clientbound.PacchettoOutPartitaTerminata;
-import com.github.unldenis.dama.core.Constanti;
+import com.github.unldenis.dama.api.Constanti;
 import com.github.unldenis.dama.core.gui.gioco.Gioco;
 import com.github.unldenis.dama.core.net.client.Client;
 import java.awt.Graphics2D;

@@ -1,10 +1,11 @@
 package com.github.unldenis.dama.core.gui.gioco;
 
+import com.github.unldenis.dama.api.gui.GuiDamiera;
 import com.github.unldenis.dama.api.model.Colore;
 import com.github.unldenis.dama.api.net.packet.TipoPacchetto;
 import com.github.unldenis.dama.api.net.packet.clientbound.PacchettoOut;
 import com.github.unldenis.dama.api.net.packet.serverbound.PacchettoInIdGiocatore;
-import com.github.unldenis.dama.core.Constanti;
+import com.github.unldenis.dama.api.Constanti;
 import com.github.unldenis.dama.core.gui.gioco.stati.LobbyStato;
 import com.github.unldenis.dama.core.gui.gioco.stati.Stato;
 import com.github.unldenis.dama.core.gui.gioco.stati.TermineStato;

@@ -1,4 +1,4 @@
-package com.github.unldenis.dama.core;
+package com.github.unldenis.dama.api;
 
 /**
  * Constanti.

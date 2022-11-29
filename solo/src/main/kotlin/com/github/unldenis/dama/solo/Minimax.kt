@@ -3,53 +3,10 @@ package com.github.unldenis.dama.solo
 import com.github.unldenis.dama.api.model.Colore
 import com.github.unldenis.dama.api.model.Damiera
 import com.github.unldenis.dama.api.model.Movimento
-import java.util.*
+import com.github.unldenis.dama.api.model.ResultMovimento
 
-fun main() {
-    val damiera = Damiera()
-    damiera.crea()
-
-    damiera.stampa()
-    println()
-
-    val scanner = Scanner(System.`in`)
-
-    while (true) {
-        damiera.muovi(
-            damiera.cellaInPosizione(scanner.nextInt(), scanner.nextInt()),
-            Movimento.valueOf(scanner.next().uppercase()),
-            false
-        )
-
-        damiera.stampa()
-        println()
-
-        mossaRobot(damiera)
-
-
-    }
-}
-
-fun mossaRobot(damiera: Damiera) {
-    val (valoreGiocata, idPedone, movimento) = minimax(
-        profondita = 1,
-        dam = damiera
-    )
-
-    if (idPedone == null || movimento == null) {
-        throw NullPointerException()
-    }
-
-    println("Movimento bot '${movimento.name}', con valore '$valoreGiocata'")
-    damiera.muovi(damiera.cercaCella(idPedone), movimento, false)
-
-    damiera.stampa()
-    println()
-}
-
-
-fun Damiera.valutaPosizione(isMaximizingPlayer: Boolean) =
-    if (isMaximizingPlayer) pedoniBianchi - pedoniNeri else pedoniNeri - pedoniBianchi
+fun Damiera.valutaPosizione(coloreGiocatore: Colore) =
+    if (coloreGiocatore == Colore.BIANCO) punteggioBianchi - punteggioNeri else punteggioNeri - punteggioBianchi
 
 fun Damiera.movimentiPossibili(coloreGiocatore: Colore): Set<Pair<Int, Movimento>> {
     val possibiliMovimenti = HashSet<Pair<Int, Movimento>>()
@@ -71,15 +28,15 @@ fun Damiera.movimentiPossibili(coloreGiocatore: Colore): Set<Pair<Int, Movimento
 fun minimax(
     profondita: Int,
     dam: Damiera,
+    coloreGiocatore: Colore,
     isMaximizingPlayer: Boolean = true
 ): Triple<Int, Int?, Movimento?> {
     if (profondita == 0) {
-        val value = -dam.valutaPosizione(isMaximizingPlayer = isMaximizingPlayer);
+        val value = dam.valutaPosizione(coloreGiocatore = coloreGiocatore);
         return Triple(value, null, null)
     }
 
-    val movPossibili =
-        dam.movimentiPossibili(coloreGiocatore = if (isMaximizingPlayer) Colore.BIANCO else Colore.NERO)
+    val movPossibili = dam.movimentiPossibili(coloreGiocatore = coloreGiocatore)
 
     var miglioreGiocata: Pair<Int, Movimento>? = null;
     var miglioreValore = if (isMaximizingPlayer) Int.MIN_VALUE else Int.MAX_VALUE;
@@ -93,8 +50,13 @@ fun minimax(
         val valore = minimax(
             profondita = profondita - 1,
             dam = copia,
+            coloreGiocatore = coloreGiocatore,
             isMaximizingPlayer = !isMaximizingPlayer
         ).first
+
+//        if (profondita == 1) {
+//            println("Movimento ${movimento.name} valore = $valore")
+//        }
 
         if (isMaximizingPlayer) {
             if (valore > miglioreValore) {
@@ -114,5 +76,17 @@ fun minimax(
     } else {
         Triple(miglioreValore, miglioreGiocata.first, miglioreGiocata.second)
     }
+}
 
+fun lanciaMinimax(damiera: Damiera, profondita: Int, coloreGiocatore: Colore): ResultMovimento? {
+    val (_, idPedone, movimento) = minimax(
+        profondita = profondita,
+        coloreGiocatore = coloreGiocatore,
+        dam = damiera
+    )
+
+    if (idPedone == null || movimento == null) {
+        throw NullPointerException()
+    }
+    return damiera.muovi(damiera.cercaCella(idPedone), movimento, false)
 }

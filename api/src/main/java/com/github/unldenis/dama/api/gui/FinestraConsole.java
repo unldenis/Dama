@@ -1,4 +1,4 @@
-package com.github.unldenis.dama.core.gui.menu;
+package com.github.unldenis.dama.api.gui;
 
 import java.io.IOException;
 import java.io.OutputStream;

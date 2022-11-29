@@ -1,6 +1,7 @@
 package com.github.unldenis.dama.core.gui.menu;
 
-import com.github.unldenis.dama.core.Constanti;
+import com.github.unldenis.dama.api.Constanti;
+import com.github.unldenis.dama.api.gui.FinestraConsole;
 import com.github.unldenis.dama.core.gui.gioco.FinestraGioco;
 import com.github.unldenis.dama.core.net.server.Server;
 import com.github.unldenis.dama.core.uti.Utilita;

@@ -17,6 +17,8 @@ public class Damiera {
   protected final Map<Integer, Cella> pedineCella = new HashMap<>();
   protected int pedoniBianchi = 12, pedoniNeri = 12;
 
+  protected int punteggioBianchi = 12, punteggioNeri = 12;
+
   public void crea() {
     int pedineId = 0;
     for (int y = 0; y < 8; y++) {
@@ -88,7 +90,8 @@ public class Damiera {
     var destPed = destinazione.getPedone();
     if (destPed != null) {
       if (destPed.getColore() == pedone.getColore()) {
-        return ResultMovimento.err("Non puoi tentare di mangiare un pedone della tua stessa squadra");
+        return ResultMovimento.err(
+            "Non puoi tentare di mangiare un pedone della tua stessa squadra");
       }
 
       if (destPed.isDamone() && !pedone.isDamone()) {
@@ -104,16 +107,28 @@ public class Damiera {
       var destinazioneSuccessiva = cellaInPosizione(destX, destY);
       if (destinazioneSuccessiva.getPedone() == null) {
 
-        if(!simula) {
+        if (!simula) {
           // mangia pedone avversario
           this.muoviPedone(pedone, partenza, destinazioneSuccessiva);
 
           destinazione.setPedone(null);
 
-          if(destPed.getColore() == Colore.BIANCO) {
+          if (destPed.getColore() == Colore.BIANCO) {
             pedoniBianchi--;
+
+            if (destPed.isDamone()) {
+              punteggioBianchi = -3;
+            } else {
+              punteggioBianchi--;
+            }
           } else {
             pedoniNeri--;
+
+            if (destPed.isDamone()) {
+              punteggioNeri = -3;
+            } else {
+              punteggioNeri--;
+            }
           }
 
           pedineCella.remove(destPed.getId());
@@ -127,7 +142,7 @@ public class Damiera {
       return ResultMovimento.err("Salto occupato");
     } else {
 
-      if(!simula) {
+      if (!simula) {
         this.muoviPedone(pedone, partenza, destinazione);
       }
       return ResultMovimento.ok(false);
@@ -144,19 +159,24 @@ public class Damiera {
 
     if (destinazione.getY() == 0 && pedone.getColore() == Colore.BIANCO) {
       pedone.setDamone(true);
+
+      punteggioBianchi += 2;
 //      System.out.printf("Pedone %s e' diventato un damone%n", pedone);
     } else if (destinazione.getY() == 7 && pedone.getColore() == Colore.NERO) {
       pedone.setDamone(true);
+
+      punteggioNeri += 2;
 //      System.out.printf("Pedone %s e' diventato un damone%n", pedone);
     }
   }
+
   public Damiera clone() {
     var d = new Damiera();
     for (int y = 0; y < 8; y++) {
       for (int x = 0; x < 8; x++) {
         var c = this.celle[y][x].clone();
 
-        if(c.getPedone() != null) {
+        if (c.getPedone() != null) {
           d.pedineCella.put(c.getPedone().getId(), c);
         }
 
@@ -165,6 +185,8 @@ public class Damiera {
     }
     d.pedoniBianchi = this.pedoniBianchi;
     d.pedoniNeri = this.pedoniNeri;
+    d.punteggioBianchi = this.punteggioBianchi;
+    d.punteggioNeri = this.punteggioNeri;
     return d;
   }
 
@@ -178,5 +200,13 @@ public class Damiera {
 
   public int getPedoniNeri() {
     return pedoniNeri;
+  }
+
+  public int getPunteggioBianchi() {
+    return punteggioBianchi;
+  }
+
+  public int getPunteggioNeri() {
+    return punteggioNeri;
   }
 }

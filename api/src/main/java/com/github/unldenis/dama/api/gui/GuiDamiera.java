@@ -1,10 +1,10 @@
-package com.github.unldenis.dama.core.gui.gioco;
+package com.github.unldenis.dama.api.gui;
 
 import com.github.unldenis.dama.api.model.Cella;
 import com.github.unldenis.dama.api.model.Colore;
 import com.github.unldenis.dama.api.model.Damiera;
 import com.github.unldenis.dama.api.model.Punto;
-import com.github.unldenis.dama.core.Constanti;
+import com.github.unldenis.dama.api.Constanti;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
