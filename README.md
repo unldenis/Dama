@@ -11,5 +11,5 @@ start javaw -jar Dama.jar
 ```
 ### Prossimi Step
 - Migliorare la UI 
-- Aggiungere la modalità single player contro un bot
-> (Completato) <a href="https://github.com/unldenis/Dama/releases/tag/0.1.0">Vedi</a>.
+- Aggiungere la modalità single player contro un bot 
+- > (Completato) <a href="https://github.com/unldenis/Dama/releases/tag/0.1.0">Vedi</a>.
