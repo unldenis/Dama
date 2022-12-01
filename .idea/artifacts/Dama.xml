@@ -1,8 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="jar" build-on-make="true" name="Dama">
-    <output-path>$USER_HOME$/Desktop</output-path>
-    <root id="archive" name="Dama.jar">
-      <element id="module-output" name="Dama" />
+    <output-path>$PROJECT_DIR$/out/artifacts</output-path>
+    <root id="archive" name="core.jar">
+      <element id="module-output" name="core" />
+      <element id="module-output" name="solo" />
+      <element id="module-output" name="api" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib/1.7.22/kotlin-stdlib-1.7.22.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/13.0/annotations-13.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib-common/1.7.22/kotlin-stdlib-common-1.7.22.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

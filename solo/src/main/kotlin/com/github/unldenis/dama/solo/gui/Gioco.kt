@@ -15,7 +15,7 @@ import javax.swing.JPanel
 /**
  * Classe che gestisce la partita.
  */
-class Gioco(val difficolta : Int) : JPanel(), MouseListener {
+class Gioco(val difficolta: Int) : JPanel(), MouseListener {
     var damiera: GuiDamiera? = null
     private var statoCorrente: Stato? = null
 

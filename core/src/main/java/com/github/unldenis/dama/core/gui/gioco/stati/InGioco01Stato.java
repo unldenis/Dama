@@ -1,5 +1,6 @@
 package com.github.unldenis.dama.core.gui.gioco.stati;
 
+import com.github.unldenis.dama.api.Constanti;
 import com.github.unldenis.dama.api.model.Cella;
 import com.github.unldenis.dama.api.model.Colore;
 import com.github.unldenis.dama.api.model.Movimento;
@@ -13,7 +14,6 @@ import com.github.unldenis.dama.api.net.packet.clientbound.PacchettoOutPartitaTe
 import com.github.unldenis.dama.api.net.packet.clientbound.PacchettoOutPossibiliMovimenti;
 import com.github.unldenis.dama.api.net.packet.serverbound.PacchettoInMuovi;
 import com.github.unldenis.dama.api.net.packet.serverbound.PacchettoInPossibiliMovimenti;
-import com.github.unldenis.dama.api.Constanti;
 import com.github.unldenis.dama.core.gui.gioco.Gioco;
 import com.github.unldenis.dama.core.net.client.Client;
 import java.awt.Graphics2D;
@@ -40,7 +40,8 @@ public class InGioco01Stato extends Stato {
     super(gioco, client);
     this.cellaPedoneSelezionato = cellaPedoneSelezionato;
 
-    client.mandaPacchetto(new PacchettoInPossibiliMovimenti(cellaPedoneSelezionato.getCoordinata()));
+    client.mandaPacchetto(
+        new PacchettoInPossibiliMovimenti(cellaPedoneSelezionato.getCoordinata()));
     gioco.repaint();
   }
 
@@ -117,7 +118,8 @@ public class InGioco01Stato extends Stato {
 
         } else {
           if (cella.getPedone().getColore() == gioco.getColoreGiocatore()) {
-            JOptionPane.showMessageDialog(gioco, ((ErrMovimento) codice).errore(), "Movimento non valido",
+            JOptionPane.showMessageDialog(gioco, ((ErrMovimento) codice).errore(),
+                "Movimento non valido",
                 JOptionPane.ERROR_MESSAGE);
           }
         }

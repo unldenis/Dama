@@ -39,8 +39,10 @@ class InGioco01Stato(private val cellaPedoneSelezionato: Cella) : Stato {
         val cellaPart = cellaPedoneSelezionato
         val cellaDest = gioco.damiera!!.cellaInPosizione(x, y)
         val pedone = cellaDest.pedone
-        if (pedone === cellaPedoneSelezionato.pedone) {
+        if (pedone === cellaPart.pedone) {
             gioco.setStatoCorrente(InGioco00Stato())
+        } else if (cellaPart.pedone.colore === pedone?.colore) {
+            gioco.setStatoCorrente(InGioco01Stato(cellaDest))
         } else {
             val movimento =
                 Movimento.ricercaMovimento(cellaDest.x - cellaPart.x, cellaDest.y - cellaPart.y)

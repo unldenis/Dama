@@ -24,6 +24,10 @@ public class Pedone {
     return p;
   }
 
+  public int getValore() {
+    return damone ? 1400 : 1000;
+  }
+
   public int getId() {
     return id;
   }

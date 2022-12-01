@@ -5,7 +5,8 @@ import com.github.unldenis.dama.api.gui.FinestraConsole;
 import com.github.unldenis.dama.core.gui.gioco.FinestraGioco;
 import com.github.unldenis.dama.core.net.server.Server;
 import com.github.unldenis.dama.core.uti.Utilita;
-import java.awt.Color;
+import com.github.unldenis.dama.solo.gui.PannelloDifficolta;
+import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -21,17 +22,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Finestra principale con la quale si possono hostare delle partite o giocare.
  */
 public class FinestraLobby extends JFrame {
 
-  public static final Color aC = Color.decode("#252323");
-  public static final Color cC = Color.decode("#f5f1ed");
-  public static final Color dC = Color.decode("#dad2bc");
-  public static final Color eC = Color.decode("#a99985");
 
   public FinestraLobby() {
     super("Dama");
@@ -40,7 +40,6 @@ public class FinestraLobby extends JFrame {
 //    setDefaultCloseOperation(EXIT_ON_CLOSE);
     setResizable(false);
     setSize(677, 343);
-
 
     this.preparaMenuBar();
     this.preparaPannelli();
@@ -53,7 +52,14 @@ public class FinestraLobby extends JFrame {
 
   public static void main(String[] args) {
 //    JFrame.setDefaultLookAndFeelDecorated(true);
-    new FinestraLobby();
+    EventQueue.invokeLater(() -> {
+      try {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+      } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException |
+               InstantiationException ignored) {
+      }
+      new FinestraLobby();
+    });
   }
 
   private void preparaMenuBar() {
@@ -62,8 +68,6 @@ public class FinestraLobby extends JFrame {
     // hosta
     var y = new JMenu("Hosta");
     y.setOpaque(true);
-    y.setBackground(eC);
-    y.setForeground(cC);
 
     var y0 = new JMenuItem("Avvia");
 
@@ -83,8 +87,6 @@ public class FinestraLobby extends JFrame {
     // help
     var x = new JMenu("Aiuto");
     x.setOpaque(true);
-    x.setBackground(eC);
-    x.setForeground(cC);
 
     // create menuitems
     var m0 = new JMenuItem("Codice");
@@ -130,7 +132,9 @@ public class FinestraLobby extends JFrame {
   }
 
   private void preparaPannelli() {
-    add(gioca());
+
+    var mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, gioca(), new PannelloDifficolta(this));
+    add(mainPane);
   }
 
   private JPanel gioca() {
@@ -140,26 +144,20 @@ public class FinestraLobby extends JFrame {
     constr.insets = new Insets(5, 5, 5, 5);
     constr.anchor = GridBagConstraints.WEST;
 
+
     constr.gridx = 0;
     constr.gridy = 0;
 
     // Labels
-    JLabel info = new JLabel("Entra in una partita");
-    info.setForeground(aC);
-
+    JLabel info = new JLabel("Gioca multiplayer");
     JLabel userNameLabel = new JLabel("Inserisci il tuo nome :");
-    userNameLabel.setForeground(eC);
-
-    JLabel ipLabel = new JLabel("Inserisci l'ip :");
-    ipLabel.setForeground(eC);
+    JLabel ipLabel = new JLabel("Inserisci l'indirizzo ip :");
 
     // Text fields
     JTextField userNameTxt = new JTextField(20);
-    userNameTxt.setForeground(aC);
 
     JTextField ipTxt = new JTextField(20);
     ipTxt.setText("localhost");
-    ipTxt.setForeground(aC);
 
     constr.gridx = 1;
     panel.add(info, constr);
@@ -182,8 +180,6 @@ public class FinestraLobby extends JFrame {
     constr.anchor = GridBagConstraints.CENTER;
 
     JButton button = new JButton("Gioca");
-    button.setBackground(dC);
-    button.setForeground(eC);
     button.setFocusPainted(false);
     button.addActionListener(event -> {
       dispose();

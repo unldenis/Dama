@@ -84,6 +84,9 @@ public class GuiDamiera extends Damiera {
           }
 
           g.drawImage(immagine, xD + 10, yD + 10, null);
+
+//          g.setColor(Color.BLUE);
+//          g.drawString(String.valueOf(p.getId()), xD + 10, yD + 10);
         }
 
         if (possibiliMovimenti != null && possibiliMovimenti.contains(cella.getCoordinata())) {
