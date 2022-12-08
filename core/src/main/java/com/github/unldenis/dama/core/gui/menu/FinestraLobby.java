@@ -1,7 +1,9 @@
 package com.github.unldenis.dama.core.gui.menu;
 
+import com.formdev.flatlaf.intellijthemes.FlatMonokaiProIJTheme;
 import com.github.unldenis.dama.api.Constanti;
 import com.github.unldenis.dama.api.gui.FinestraConsole;
+import com.github.unldenis.dama.api.gui.GuiDamiera;
 import com.github.unldenis.dama.core.gui.gioco.FinestraGioco;
 import com.github.unldenis.dama.core.net.server.Server;
 import com.github.unldenis.dama.core.uti.Utilita;
@@ -24,8 +26,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Finestra principale con la quale si possono hostare delle partite o giocare.
@@ -38,6 +38,7 @@ public class FinestraLobby extends JFrame {
 
 //    setUndecorated(true);
 //    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    setIconImage(GuiDamiera.damoneNeroImg);
     setResizable(false);
     setSize(677, 343);
 
@@ -52,12 +53,9 @@ public class FinestraLobby extends JFrame {
 
   public static void main(String[] args) {
 //    JFrame.setDefaultLookAndFeelDecorated(true);
-    EventQueue.invokeLater(() -> {
-      try {
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-      } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException |
-               InstantiationException ignored) {
-      }
+
+    EventQueue.invokeLater(()-> {
+      FlatMonokaiProIJTheme.setup();
       new FinestraLobby();
     });
   }
@@ -67,7 +65,6 @@ public class FinestraLobby extends JFrame {
 
     // hosta
     var y = new JMenu("Hosta");
-    y.setOpaque(true);
 
     var y0 = new JMenuItem("Avvia");
 
@@ -86,8 +83,6 @@ public class FinestraLobby extends JFrame {
 
     // help
     var x = new JMenu("Aiuto");
-    x.setOpaque(true);
-
     // create menuitems
     var m0 = new JMenuItem("Codice");
 
@@ -134,6 +129,7 @@ public class FinestraLobby extends JFrame {
   private void preparaPannelli() {
 
     var mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, gioca(), new PannelloDifficolta(this));
+    mainPane.setEnabled(false);
     add(mainPane);
   }
 

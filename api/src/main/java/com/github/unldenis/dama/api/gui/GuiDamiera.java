@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
  */
 public class GuiDamiera extends Damiera {
 
-  private static final BufferedImage damaBiancaImg, damaNeraImg, damoneBiancoImg, damoneNeroImg;
+  public static final BufferedImage damaBiancaImg, damaNeraImg, damoneBiancoImg, damoneNeroImg;
 
 
   static {

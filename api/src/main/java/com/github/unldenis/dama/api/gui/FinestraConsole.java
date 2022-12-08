@@ -30,6 +30,7 @@ public class FinestraConsole extends JFrame {
 
   private void preparaPannelli() {
     JTextArea textArea = new JTextArea(50, 10);
+    textArea.setEditable(false);
 
     PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
     System.setOut(printStream);
