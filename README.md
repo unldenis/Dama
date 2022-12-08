@@ -10,5 +10,5 @@ Eseguire il seguente comando per partire:
 start javaw -jar Dama.jar
 ```
 ### Prossimi Step
-- Migliorare la UI 
+- Migliorare la UI (**Completato**) <a href="https://github.com/unldenis/Dama/releases/tag/0.2.0">Vedi</a>.
 - Aggiungere la modalità single player contro un bot. (**Completato**) <a href="https://github.com/unldenis/Dama/releases/tag/0.1.0">Vedi</a>.
